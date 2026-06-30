@@ -135,3 +135,31 @@ Remove the lab cluster with:
 ```bash
 bash p3/scripts/cleanup.sh
 ```
+
+## Local Windows test with Docker Desktop
+
+This path is useful for development only; use the Linux VM workflow above for
+the evaluation. Start Docker Desktop in Linux-container mode, push the project
+to the public GitHub repository, and run PowerShell from the repository root:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File p3/scripts/windows/setup.ps1 `
+  -RepoUrl https://github.com/YOUR_LOGIN/YOUR_LOGIN-iot.git
+
+powershell -ExecutionPolicy Bypass -File p3/scripts/windows/verify.ps1
+```
+
+The setup downloads a checksum-verified K3d executable into the ignored
+`p3/.tools` directory and uses the `kubectl` bundled with Docker Desktop.
+
+Open the Argo CD UI with:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File p3/scripts/windows/argocd-ui.ps1
+```
+
+Remove the Windows test cluster with:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File p3/scripts/windows/cleanup.ps1
+```
